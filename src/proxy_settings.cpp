@@ -59,7 +59,7 @@ void init(proxy_settings& p, Settings const& sett)
 	if (env_value) {
 		std::string source = std::string(env_value);
 		std::vector<std::string> trackers;
-     	boost::split(trackers, source, boost::is_any_of(";"));
+     	boost::split(trackers, source, boost::is_any_of(";, "));
 		//tracker trim
 		for(std::string tracker : trackers) {
 			boost::trim(tracker);
