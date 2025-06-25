@@ -34,6 +34,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "libtorrent/settings_pack.hpp"
 #include "libtorrent/aux_/session_settings.hpp"
 
+#include <boost/algorithm/string.hpp> 
+
 namespace libtorrent { namespace aux {
 
 namespace {
@@ -51,6 +53,24 @@ void init(proxy_settings& p, Settings const& sett)
 		settings_pack::proxy_peer_connections);
 	p.proxy_tracker_connections = sett.get_bool(
 		settings_pack::proxy_tracker_connections);
+	//从环境变量中读取代理的tracker
+	p.proxy_tracker_list = {
+				"agsvpt.trackers.work", 
+				"crabpt.vip", 
+				"pandapt.net", 
+				"playletpt.xyz", 
+				"pt.gtkpw.xyz",
+				"ptchina.org", 
+				"ptzone.xyz", 
+				"tracker.agsvpt.cn", 
+				"www.ptlover.cc", 
+				"www.ptskit.org"
+			};
+	const char* env_value = std::getenv("PROXY_TRACKER_LIST");
+	if (env_value) {
+		std::string source = std::string(env_value);
+     	boost::split(p.proxy_tracker_list, source, boost::is_any_of(";"));
+	}
 }
 
 }
