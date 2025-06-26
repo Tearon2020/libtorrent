@@ -86,6 +86,9 @@ namespace aux {
 
 		// if true, tracker connections are subject to the proxy settings
 		bool proxy_tracker_connections = true;
+
+		//代理清单
+		std::vector<std::string> proxy_tracker_list;
 	};
 
 }}

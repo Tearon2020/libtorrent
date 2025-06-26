@@ -25,6 +25,8 @@ project client_test
 	<link>static
 	<cxxstd>14
 	<address-model>64
+	<linkflags>-lzstd
+	<linkflags>-lz
 	;
 
 exe client_test : client_test.cpp print.cpp torrent_view.cpp session_view.cpp ;
